@@ -2,7 +2,7 @@ const translations = {
   en: {
     title: "Welcome",
     description: "This is a sample website.",
-    author_profile_title: "Author Profile",
+    author_profile_title: "About Me",
     author_profile_desc: "I am a Full-Stack Web Developer and Digital Product Creator, specializing in Laravel projects, landing pages, and ready-made web solutions. Passionate about delivering high-quality projects, improving existing websites, and helping clients launch their digital products quickly and efficiently.",
     contact_title: "Contact",
     contact_desc: "Whether you want to buy a project, request changes, or build your own custom project, feel free to reach out anytime.",

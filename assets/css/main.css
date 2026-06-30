@@ -2678,7 +2678,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Author Profile Section
+# About Me Section
 --------------------------------------------------------------*/
 .author-profile .author-card {
   background-color: var(--surface-color);
@@ -3437,7 +3437,7 @@ section,
   margin-bottom: 30px;
   background-color: color-mix(in srgb, var(--default-color), transparent 98%);
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
-  padding: 30px;
+  padding: 10px;
   border-radius: 5px;
 }
 
