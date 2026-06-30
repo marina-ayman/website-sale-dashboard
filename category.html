@@ -50,6 +50,21 @@ background-color:
   background-color: var(--accent-color);
   color: var(--contrast-color);
 }
+
+/* Pagination Styles */
+.project-item {
+  display: none;
+}
+.project-item.active {
+  display: block;
+}
+.pagination-2 ul li a {
+  cursor: pointer;
+}
+.pagination-2 ul li a:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
 </style>
 <body class="category-page">
 
@@ -152,7 +167,7 @@ background-color:
                 <li><a href="#">ERP Systems <span></span></a></li>
                 <li><a href="#">CRM systems<span></span></a></li>
                 <li><a href="#">inventory and warehouse management <span></span></a></li>
-                <li><a href="#">sales and invoicing platforms <span>(22)</span></a></li>
+                <li><a href="#">sales and invoicing platforms <span></span></a></li>
                 <li><a href="#">RESTful APIs <span></span></a></li>
                 <li><a href="#">Eloquent ORM <span></span></a></li>
                 <li><a href="#">Notifications <span></span></a></li>
@@ -243,7 +258,7 @@ background-color:
             <div class="container" data-aos="fade-up" data-aos-delay="100">
               <div class="row  gy-4 gx-3">
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item active" data-page="1">
                   <article>
 
                     <div class="post-img">
@@ -268,7 +283,7 @@ background-color:
                   </article>
                 </div><!-- End post list item -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item active" data-page="1">
                   <article>
 
                     <div class="post-img">
@@ -292,7 +307,7 @@ background-color:
                   </article>
                 </div><!-- End post list item -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item active" data-page="1">
                   <article>
 
                     <div class="post-img">
@@ -316,7 +331,7 @@ background-color:
                   </article>
                 </div><!-- End post list item -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item" data-page="2">
                   <article>
 
                     <div class="post-img">
@@ -339,7 +354,7 @@ background-color:
                   </article>
                 </div><!-- End post list item -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item" data-page="2">
                   <article>
 
                     <div class="post-img">
@@ -362,7 +377,7 @@ background-color:
                   </article>
                 </div><!-- End post list item -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item" data-page="2">
                   <article>
 
                     <div class="post-img">
@@ -386,7 +401,7 @@ background-color:
                   </article>
                 </div><!-- End post list item -->
 
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 project-item" data-page="3">
                   <article>
 
                     <div class="post-img">
@@ -420,15 +435,12 @@ background-color:
 
             <div class="container">
               <div class="d-flex justify-content-center">
-                <ul>
-                  <li><a href="#"><i class="bi bi-chevron-left"></i></a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#" class="active">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li>...</li>
-                  <li><a href="#">10</a></li>
-                  <li><a href="#"><i class="bi bi-chevron-right"></i></a></li>
+                <ul id="pagination-list">
+                  <li><a href="#" id="prev-btn"><i class="bi bi-chevron-left"></i></a></li>
+                  <li><a href="#" class="page-link active" data-page="1">1</a></li>
+                  <li><a href="#" class="page-link" data-page="2">2</a></li>
+                  <li><a href="#" class="page-link" data-page="3">3</a></li>
+                  <li><a href="#" id="next-btn"><i class="bi bi-chevron-right"></i></a></li>
                 </ul>
               </div>
             </div>
@@ -523,6 +535,62 @@ background-color:
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Pagination Script -->
+  <script>
+    let currentPage = 1;
+    const totalPages = 3;
+
+    function showPage(page) {
+      // Hide all projects
+      const allProjects = document.querySelectorAll('.project-item');
+      allProjects.forEach(project => {
+        project.classList.remove('active');
+      });
+
+      // Show projects for current page
+      const pageProjects = document.querySelectorAll(`.project-item[data-page="${page}"]`);
+      pageProjects.forEach(project => {
+        project.classList.add('active');
+      });
+
+      // Update pagination buttons
+      const pageLinks = document.querySelectorAll('.page-link');
+      pageLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.page == page) {
+          link.classList.add('active');
+        }
+      });
+
+      currentPage = page;
+    }
+
+    // Page link click handlers
+    document.querySelectorAll('.page-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = parseInt(link.dataset.page);
+        showPage(page);
+      });
+    });
+
+    // Previous button
+    document.getElementById('prev-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage > 1) {
+        showPage(currentPage - 1);
+      }
+    });
+
+    // Next button
+    document.getElementById('next-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      if (currentPage < totalPages) {
+        showPage(currentPage + 1);
+      }
+    });
+  </script>
 
 </body>
 
